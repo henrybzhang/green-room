@@ -1,18 +1,18 @@
-import React, { createContext, useState, useEffect, useContext } from 'react';
-import {InventoryContext} from './InventoryProvider';
+import React, { createContext, useState, useEffect, useContext } from "react";
+import { InventoryContext } from "./InventoryProvider";
 
 const ActionContext = createContext();
 
 const initialActions = {
-  'pickUpTrash': 'pick up trash',
-  'filterRiver': 'Filter out trash from river',
-}
+  pickUpTrash: "pick up trash",
+  filterRiver: "Filter out trash from river",
+};
 
 const buildActions = {
-  'recycler': 'Fix recycler',
-  'net': 'build net',
-  'waterFilter': 'build waterFilter',
-  'airFilter': 'build airFilter',
+  recycler: "Fix recycler",
+  net: "build net",
+  waterFilter: "build waterFilter",
+  airFilter: "build airFilter",
   // 'workshop': 'build workshop',
   // 'solarPanel': 'build solar panels',
   // 'windmill': 'build windmill',
@@ -20,12 +20,11 @@ const buildActions = {
   // 'automaticTrashFilter': 'build automatic trash filter',
   // 'automaticWaterFilter': 'build automatic water filter',
   // 'automaticAirFilter': 'build automatic air filter',
-  'bridge': 'build bridge',
-}
+  bridge: "build bridge",
+};
 
-const ActionProvider = ({children}) => {
-
-  const {addItem} = useContext(InventoryContext);
+const ActionProvider = ({ children }) => {
+  const { addItem } = useContext(InventoryContext);
   const [currentAction, setCurrentAction] = useState(null);
   const [availableActions, setAvailableActions] = useState(initialActions);
 
@@ -34,29 +33,30 @@ const ActionProvider = ({children}) => {
       return;
     }
 
-    switch(currentAction) {
-      case 'pickUpTrash':
-        addItem('trash', 1)
+    switch (currentAction) {
+      case "pickUpTrash":
+        addItem("trash", 1);
         break;
-      case 'filterRiver': 
-        addItem('wood', 1)
+      case "filterRiver":
+        addItem("wood", 1);
         break;
       default:
-        throw Error(`Unknown action: ${currentAction}`)
+        throw Error(`Unknown action: ${currentAction}`);
     }
     setCurrentAction(null);
-    
   }, [currentAction]);
 
-
-  return (<ActionContext.Provider
-            value={{
-              currentAction,
-              setCurrentAction,
-              availableActions
-            }}>
-    {children}
-  </ActionContext.Provider>)
+  return (
+    <ActionContext.Provider
+      value={{
+        currentAction,
+        setCurrentAction,
+        availableActions,
+      }}
+    >
+      {children}
+    </ActionContext.Provider>
+  );
 };
 
 export { ActionContext, ActionProvider };

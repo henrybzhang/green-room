@@ -1,7 +1,7 @@
 {
   "name": "game",
   "version": "0.1.0",
-  "homepage": "https://hbzhang99.github.io/green-room",
+  "homepage": "https://henrybzhang.github.io/green-room",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",
@@ -18,13 +18,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "fix": "prettier-eslint --write \"**/*.js\""
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "fix": "prettier-eslint --write \"./src/**/*.js\""
   },
   "browserslist": {
     "production": [
@@ -39,6 +33,8 @@
     ]
   },
   "devDependencies": {
-    "prettier-eslint": "^15.0.1"
+    "eslint-plugin-react": "^7.30.0",
+    "prettier-eslint": "^15.0.1",
+    "prettier-eslint-cli": "^6.0.1"
   }
 }
