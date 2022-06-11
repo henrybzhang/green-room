@@ -1,17 +1,22 @@
 {
   "files": {
-    "main.css": "/green-room/static/css/main.6cdfc62e.css",
-    "main.js": "/green-room/static/js/main.c3b6ccd6.js",
-    "static/js/787.6a541d2d.chunk.js": "/green-room/static/js/787.6a541d2d.chunk.js",
-    "static/media/2.JPG": "/green-room/static/media/2.8959fc90c6098885ac6a.JPG",
-    "static/media/1.JPG": "/green-room/static/media/1.66ddb223deb81aecd94c.JPG",
+    "main.css": "/green-room/static/css/main.bf713a57.chunk.css",
+    "main.js": "/green-room/static/js/main.1712e55f.chunk.js",
+    "main.js.map": "/green-room/static/js/main.1712e55f.chunk.js.map",
+    "runtime-main.js": "/green-room/static/js/runtime-main.9c95c269.js",
+    "runtime-main.js.map": "/green-room/static/js/runtime-main.9c95c269.js.map",
+    "static/js/2.2b206d93.chunk.js": "/green-room/static/js/2.2b206d93.chunk.js",
+    "static/js/2.2b206d93.chunk.js.map": "/green-room/static/js/2.2b206d93.chunk.js.map",
     "index.html": "/green-room/index.html",
-    "main.6cdfc62e.css.map": "/green-room/static/css/main.6cdfc62e.css.map",
-    "main.c3b6ccd6.js.map": "/green-room/static/js/main.c3b6ccd6.js.map",
-    "787.6a541d2d.chunk.js.map": "/green-room/static/js/787.6a541d2d.chunk.js.map"
+    "static/css/main.bf713a57.chunk.css.map": "/green-room/static/css/main.bf713a57.chunk.css.map",
+    "static/js/2.2b206d93.chunk.js.LICENSE.txt": "/green-room/static/js/2.2b206d93.chunk.js.LICENSE.txt",
+    "static/media/1.66ddb223.JPG": "/green-room/static/media/1.66ddb223.JPG",
+    "static/media/2.8959fc90.JPG": "/green-room/static/media/2.8959fc90.JPG"
   },
   "entrypoints": [
-    "static/css/main.6cdfc62e.css",
-    "static/js/main.c3b6ccd6.js"
+    "static/js/runtime-main.9c95c269.js",
+    "static/js/2.2b206d93.chunk.js",
+    "static/css/main.bf713a57.chunk.css",
+    "static/js/main.1712e55f.chunk.js"
   ]
 }
