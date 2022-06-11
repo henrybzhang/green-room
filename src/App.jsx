@@ -16,9 +16,9 @@ function App() {
       }}
     >
       <div className="items">
-        <EventLog />
         <ActionButtonGroup actionMap={availableActions} />
         <Inventory />
+        <EventLog />
       </div>
     </div>
   );
