@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/green-room/static/css/main.bf713a57.chunk.css",
+    "main.css": "/green-room/static/css/main.d9cd0994.chunk.css",
     "main.js": "/green-room/static/js/main.1712e55f.chunk.js",
     "main.js.map": "/green-room/static/js/main.1712e55f.chunk.js.map",
     "runtime-main.js": "/green-room/static/js/runtime-main.9c95c269.js",
@@ -8,7 +8,7 @@
     "static/js/2.2b206d93.chunk.js": "/green-room/static/js/2.2b206d93.chunk.js",
     "static/js/2.2b206d93.chunk.js.map": "/green-room/static/js/2.2b206d93.chunk.js.map",
     "index.html": "/green-room/index.html",
-    "static/css/main.bf713a57.chunk.css.map": "/green-room/static/css/main.bf713a57.chunk.css.map",
+    "static/css/main.d9cd0994.chunk.css.map": "/green-room/static/css/main.d9cd0994.chunk.css.map",
     "static/js/2.2b206d93.chunk.js.LICENSE.txt": "/green-room/static/js/2.2b206d93.chunk.js.LICENSE.txt",
     "static/media/1.66ddb223.JPG": "/green-room/static/media/1.66ddb223.JPG",
     "static/media/2.8959fc90.JPG": "/green-room/static/media/2.8959fc90.JPG"
@@ -16,7 +16,7 @@
   "entrypoints": [
     "static/js/runtime-main.9c95c269.js",
     "static/js/2.2b206d93.chunk.js",
-    "static/css/main.bf713a57.chunk.css",
+    "static/css/main.d9cd0994.chunk.css",
     "static/js/main.1712e55f.chunk.js"
   ]
 }
