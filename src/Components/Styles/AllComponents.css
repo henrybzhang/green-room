@@ -1,0 +1,42 @@
+.buttons{
+  background-color: none;
+  color: white;
+  border: 1px solid white;
+  margin: 4px 2px;
+  cursor: pointer;
+  padding: 2.5%;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 13px;
+  width: 140px;
+  
+}
+
+.buttons:hover{
+  color: green;
+  border: 1px solid green;
+  text-decoration: bold;
+}
+
+.log{
+  color:white;
+  text-align: left; 
+  margin-right: 15px; 
+}
+
+.invent{
+  color:white;
+  text-align: left; 
+  border: 1.2px dashed white;
+  padding: 1%;
+  width: 300px;
+  height: 100px;
+  
+}
+
+.buttons-group{
+  margin-right: 100px; 
+  display: flex;
+  flex-direction: column;
+}
