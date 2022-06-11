@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/green-room/static/css/main.2c1c76a9.css",
-    "main.js": "/green-room/static/js/main.3f0615c7.js",
+    "main.css": "/green-room/static/css/main.e491aee2.css",
+    "main.js": "/green-room/static/js/main.50dfd13f.js",
     "static/js/787.6a541d2d.chunk.js": "/green-room/static/js/787.6a541d2d.chunk.js",
     "static/media/1.JPG": "/green-room/static/media/1.66ddb223deb81aecd94c.JPG",
     "index.html": "/green-room/index.html",
-    "main.2c1c76a9.css.map": "/green-room/static/css/main.2c1c76a9.css.map",
-    "main.3f0615c7.js.map": "/green-room/static/js/main.3f0615c7.js.map",
+    "main.e491aee2.css.map": "/green-room/static/css/main.e491aee2.css.map",
+    "main.50dfd13f.js.map": "/green-room/static/js/main.50dfd13f.js.map",
     "787.6a541d2d.chunk.js.map": "/green-room/static/js/787.6a541d2d.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.2c1c76a9.css",
-    "static/js/main.3f0615c7.js"
+    "static/css/main.e491aee2.css",
+    "static/js/main.50dfd13f.js"
   ]
 }
