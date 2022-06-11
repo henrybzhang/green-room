@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/green-room/static/css/main.e69772de.css",
+    "main.js": "/green-room/static/js/main.96ecc726.js",
+    "static/js/787.6a541d2d.chunk.js": "/green-room/static/js/787.6a541d2d.chunk.js",
+    "index.html": "/green-room/index.html",
+    "main.e69772de.css.map": "/green-room/static/css/main.e69772de.css.map",
+    "main.96ecc726.js.map": "/green-room/static/js/main.96ecc726.js.map",
+    "787.6a541d2d.chunk.js.map": "/green-room/static/js/787.6a541d2d.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e69772de.css",
+    "static/js/main.96ecc726.js"
+  ]
+}
