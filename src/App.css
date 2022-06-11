@@ -32,8 +32,6 @@
 
 .items{
   object-fit: scale-down;
-  width: 200px;
-  height: 300px;
   padding-left: 2%;
   padding-top: 2%;
   display: flex;
