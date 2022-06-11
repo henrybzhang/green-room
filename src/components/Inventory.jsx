@@ -7,12 +7,16 @@ function Inventory() {
 
   return (
     <fieldset className="invent">
-      <legend>collection</legend>
+      <legend>Collection</legend>
       {Object.entries(playerItems).map(([itemName, amount]) => (
-        <div>
-          {itemName}
-          :
-          {amount}
+        <div className='invent-items'>
+          <div>
+            {itemName}
+            :&nbsp;
+          </div>
+          <div className='invent-item-two'>
+            {amount}
+          </div> 
         </div>
       ))}
     </fieldset>

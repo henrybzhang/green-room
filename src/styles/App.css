@@ -1,6 +1,10 @@
 .app {
   min-height: 100vh;
+  margin: 0;
   background-repeat: no-repeat;
+  background-size: 150vh auto;
+  background-position: center;
+
 }
 
 .items {

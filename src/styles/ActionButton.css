@@ -1,7 +1,7 @@
 .buttons {
   background-color: transparent;
   color: white;
-  border: 1px solid white;
+  border: 1.3px solid white;
   margin: 4px 2px;
   cursor: pointer;
   padding: 2.5%;
@@ -10,13 +10,16 @@
   display: inline-block;
   font-size: 13px;
   width: 140px;
-  text-shadow: 2px 2px 4px #000000;
+  /* text-shadow: 10px 10px 10px #000000; */
   box-shadow: 2px 2px 4px #000000;
+  -webkit-text-stroke-width: 0.3px;
+  -webkit-text-stroke-color: white;
+  text-shadow: 4px 4px 0px #000000, 1px 1px 5px #000000, 1px 1px 5px #000000, 1px 1px 5px #000000;
 }
 
 .buttons:hover {
   color: #9fe29c;
-  border: 1px solid #9fe29c;
+  border: 1.3px solid #9fe29c;
   text-decoration: bold;
 }
 
