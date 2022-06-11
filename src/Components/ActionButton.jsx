@@ -7,7 +7,7 @@ const ActionButton = ({actionName, actionText}) => {
   const {setCurrentAction} = useContext(ActionContext)
   
   return (
-    <button className="buttons" onClick={() => setCurrentAction(actionName)}>
+    <button className="buttons shrink-on-hover" onClick={() => setCurrentAction(actionName)}>
       {actionText}
     </button>
   )
