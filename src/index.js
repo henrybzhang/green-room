@@ -1,19 +1,19 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import { ActionProvider } from './Providers/ActionProvider';
-import { InventoryProvider } from './Providers/InventoryProvider';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { ActionProvider } from "./Providers/ActionProvider";
+import { InventoryProvider } from "./Providers/InventoryProvider";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <InventoryProvider>
-    <ActionProvider>
-    <App />
+      <ActionProvider>
+        <App />
       </ActionProvider>
-      </InventoryProvider>
+    </InventoryProvider>
   </React.StrictMode>
 );
 
