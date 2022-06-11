@@ -4,22 +4,27 @@
   "homepage": "https://henrybzhang.github.io/green-room",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^5.14.1",
-    "@testing-library/react": "^13.0.0",
-    "@testing-library/user-event": "^13.2.1",
     "gh-pages": "^4.0.0",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
-    "react-scripts": "^5.0.1",
-    "web-vitals": "^2.1.0"
+    "react-scripts": "^4.0.0",
+    "stylelint": "^14.9.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "fix": "prettier-eslint --write \"./src/**/*.js\"",
-    "deploy": "gh-pages -d build"
+    "fix": "prettier-eslint --write \"./src/**/*.js\" && prettier-eslint --write \"./src/**/*.jsx\" && stylelint --fix 'src/**/*.css'",
+    "deploy": "yarn build && gh-pages -d build"
+  },
+  "devDependencies": {
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-plugin-react": "^7.30.0",
+    "prettier": "^2.6.2",
+    "prettier-eslint": "^15.0.1",
+    "prettier-eslint-cli": "^6.0.1",
+    "stylelint-config-standard": "^26.0.0"
   },
   "browserslist": {
     "production": [
@@ -32,10 +37,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "eslint-plugin-react": "^7.30.0",
-    "prettier-eslint": "^15.0.1",
-    "prettier-eslint-cli": "^6.0.1"
   }
 }

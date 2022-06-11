@@ -1,0 +1,5 @@
+.buttons-group {
+  margin-right: 100px;
+  display: flex;
+  flex-direction: column;
+}

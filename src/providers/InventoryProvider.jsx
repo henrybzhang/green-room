@@ -1,14 +1,11 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState } from 'react';
 
 const InventoryContext = createContext();
 
-const InventoryProvider = ({ children }) => {
-  const [playerItems, setPlayerItems] = useState({
-    plastic: 78,
-    wood: 13,
-  });
+function InventoryProvider({ children }) {
+  const [playerItems, setPlayerItems] = useState({});
 
-  const [playerStructures, setPlayerStructures] = useState({})
+  const [playerStructures, setPlayerStructures] = useState({});
 
   const addItem = (itemName, amount) => {
     if (itemName in playerItems) {
@@ -36,6 +33,6 @@ const InventoryProvider = ({ children }) => {
       {children}
     </InventoryContext.Provider>
   );
-};
+}
 
 export { InventoryContext, InventoryProvider };
