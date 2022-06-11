@@ -8,6 +8,8 @@ const InventoryProvider = ({ children }) => {
     wood: 13,
   });
 
+  const [playerStructures, setPlayerStructures] = useState({})
+
   const addItem = (itemName, amount) => {
     if (itemName in playerItems) {
       setPlayerItems({
@@ -26,6 +28,8 @@ const InventoryProvider = ({ children }) => {
     <InventoryContext.Provider
       value={{
         playerItems,
+        playerStructures,
+        setPlayerStructures,
         addItem,
       }}
     >

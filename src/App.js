@@ -6,14 +6,17 @@ import { ActionContext } from "./Providers/ActionProvider";
 import "./App.css";
 
 function App() {
-  const { availableActions } = useContext(ActionContext);
+  const { availableActions, backgroundImageUrl } = useContext(ActionContext);
   console.log("availableActions", availableActions);
+  console.log(backgroundImageUrl)
   return (
-    <div className="App">
+    <div className="App" style={{
+      backgroundImage: "url(" + backgroundImageUrl + ")"
+    }}>
       <div className="items">
-        <EventLog />
         <ActionButtonGroup actionMap={availableActions} />
         <Inventory />
+        <EventLog />
       </div>
     </div>
   );

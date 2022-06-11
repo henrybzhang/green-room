@@ -1,5 +1,7 @@
 import React, { createContext, useState, useEffect, useContext } from "react";
 import { InventoryContext } from "./InventoryProvider";
+import background1 from '../images/1.JPG';
+import background2 from '../images/2.JPG';
 
 const ActionContext = createContext();
 
@@ -24,27 +26,75 @@ const buildActions = {
 };
 
 const ActionProvider = ({ children }) => {
-  const { addItem } = useContext(InventoryContext);
+  const { addItem, playerItems, playerStructures, setPlayerStructures } = useContext(InventoryContext);
   const [currentAction, setCurrentAction] = useState(null);
   const [availableActions, setAvailableActions] = useState(initialActions);
+  const [environmentLevel, setEnvironmentLevel] = useState(0);
+  const [backgroundImageUrl, setBackgroundImageUrl] = useState(background1);
+
+  const [playerActionCount, setPlayerActionCount] = useState({});
 
   useEffect(() => {
     if (!currentAction) {
       return;
     }
 
-    switch (currentAction) {
-      case "pickUpTrash":
-        addItem("trash", 1);
-        break;
-      case "filterRiver":
-        addItem("wood", 1);
-        break;
-      default:
-        throw Error(`Unknown action: ${currentAction}`);
-    }
+    try {
+      switch (currentAction) {
+        case "pickUpTrash":
+          addItem("trash", 1);
+          break;
+        case "filterRiver":
+          addItem("wood", 1);
+          break;
+        case "fixRecycler":
+          setPlayerStructures({
+            ...playerStructures,
+            recycler: true,
+          })
+          setBackgroundImageUrl(background2);
+          break;
+        case "useRecycler":
+
+          break;
+        default:
+          throw Error(`Unknown action: ${currentAction}`);
+      }
+      addPlayerActionCount(currentAction);
+    } catch (e) {}
     setCurrentAction(null);
   }, [currentAction]);
+
+  const addPlayerActionCount = (playerAction) => {
+    if (playerAction in playerActionCount) {
+      setPlayerActionCount({
+        ...playerActionCount,
+        [playerAction]: playerActionCount[playerAction] + 1,
+      });
+    } else {
+      setPlayerActionCount({
+        ...playerActionCount,
+        [playerAction]: 1,
+      });
+    }
+  }
+
+  useEffect(() => {
+    if (playerActionCount.pickUpTrash === 10) {
+      setAvailableActions({
+        ...availableActions,
+        fixRecycler: 'Fix recycler'
+      })
+    }
+
+    if (playerStructures.recycler) {
+      setAvailableActions({
+        ...availableActions,
+        useRecycler: 'Recycle trash'
+      })
+    }
+
+  }, [playerItems, playerActionCount, playerStructures]);
 
   return (
     <ActionContext.Provider
@@ -52,6 +102,7 @@ const ActionProvider = ({ children }) => {
         currentAction,
         setCurrentAction,
         availableActions,
+        backgroundImageUrl
       }}
     >
       {children}
