@@ -1,8 +1,11 @@
 .invent {
   color: white;
   text-align: left;
-  border: 1.2px dashed white;
+  border: 1.7px dashed white;
   padding: 1%;
   width: 300px;
   height: 100px;
+  margin: 3%;
+  text-shadow: 2px 2px 4px #000000;
+  box-shadow: 2px 2px 4px #000000;
 }

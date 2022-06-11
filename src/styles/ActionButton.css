@@ -10,6 +10,8 @@
   display: inline-block;
   font-size: 13px;
   width: 140px;
+  text-shadow: 2px 2px 4px #000000;
+  box-shadow: 2px 2px 4px #000000;
 }
 
 .buttons:hover {

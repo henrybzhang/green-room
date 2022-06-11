@@ -6,7 +6,8 @@ function Inventory() {
   const { playerItems } = useContext(InventoryContext);
 
   return (
-    <div className="invent">
+    <fieldset className="invent">
+      <legend>collection</legend>
       {Object.entries(playerItems).map(([itemName, amount]) => (
         <div>
           {itemName}
@@ -14,7 +15,7 @@ function Inventory() {
           {amount}
         </div>
       ))}
-    </div>
+    </fieldset>
   );
 }
 
