@@ -5,6 +5,7 @@ import React, {
   useContext,
   useMemo,
 } from 'react';
+import { DebugContext } from './DebugProvider';
 import { InventoryContext } from './InventoryProvider';
 
 const ActionContext = createContext();
@@ -13,22 +14,22 @@ const initialActions = {
   pickUpTrash: 'Pick up trash',
 };
 
-// const buildingRequirements = {
-//   recycler: {
-//     metal: -5,
-//   },
-//   airFilter: {
-//     wood: -5,
-//   },
-//   net: {
-//     plastic: -5,
-//   },
-//   bridge: {
-//     wood: -10,
-//     metal: -10,
-//   },
-// };
-const buildingRequirements = {
+const prodbuildingRequirements = {
+  recycler: {
+    metal: -5,
+  },
+  airFilter: {
+    wood: -5,
+  },
+  net: {
+    plastic: -5,
+  },
+  bridge: {
+    wood: -10,
+    metal: -10,
+  },
+};
+const debugbuildingRequirements = {
   recycler: {
     metal: -1,
   },
@@ -63,11 +64,16 @@ function ActionProvider({ children }) {
   const {
     playerItems, updateItems, playerStructures, setPlayerStructures,
   } = useContext(InventoryContext);
+  const { debug } = useContext(DebugContext);
   const [currentAction, setCurrentAction] = useState(null);
   const [availableActions, setAvailableActions] = useState(initialActions);
   const [playerActionCount, setPlayerActionCount] = useState({});
   const [environmentLevel, setEnvironmentLevel] = useState(1);
   const [nextText, setNextText] = useState(null);
+
+  const buildingRequirements = debug
+    ? debugbuildingRequirements
+    : prodbuildingRequirements;
 
   const addPlayerActionCount = (playerAction) => {
     if (playerAction in playerActionCount) {

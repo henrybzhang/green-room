@@ -5,16 +5,19 @@ import App from './App';
 import { ActionProvider } from './providers/ActionProvider';
 import { InventoryProvider } from './providers/InventoryProvider';
 import { BackgroundProvider } from './providers/BackgroundProvider';
+import { DebugProvider } from './providers/DebugProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <InventoryProvider>
-      <ActionProvider>
-        <BackgroundProvider>
-          <App />
-        </BackgroundProvider>
-      </ActionProvider>
-    </InventoryProvider>
+    <DebugProvider>
+      <InventoryProvider>
+        <ActionProvider>
+          <BackgroundProvider>
+            <App />
+          </BackgroundProvider>
+        </ActionProvider>
+      </InventoryProvider>
+    </DebugProvider>
   </React.StrictMode>,
 );
