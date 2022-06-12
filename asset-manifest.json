@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/green-room/static/css/main.551dba28.chunk.css",
-    "main.js": "/green-room/static/js/main.5f2f1823.chunk.js",
-    "main.js.map": "/green-room/static/js/main.5f2f1823.chunk.js.map",
+    "main.js": "/green-room/static/js/main.3124b87f.chunk.js",
+    "main.js.map": "/green-room/static/js/main.3124b87f.chunk.js.map",
     "runtime-main.js": "/green-room/static/js/runtime-main.9c95c269.js",
     "runtime-main.js.map": "/green-room/static/js/runtime-main.9c95c269.js.map",
     "static/js/2.08848d97.chunk.js": "/green-room/static/js/2.08848d97.chunk.js",
@@ -15,6 +15,6 @@
     "static/js/runtime-main.9c95c269.js",
     "static/js/2.08848d97.chunk.js",
     "static/css/main.551dba28.chunk.css",
-    "static/js/main.5f2f1823.chunk.js"
+    "static/js/main.3124b87f.chunk.js"
   ]
 }
