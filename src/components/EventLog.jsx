@@ -18,30 +18,32 @@ function EventLog() {
         throw Error(`Unknown action: ${currentAction}`);
       }
 
+      const eventLogToKeep = eventLog.slice(0, MAX_EVENTS);
+
       switch (currentAction) {
         case 'pickUpTrash':
-          setEventLog(['Some trash from the ground is picked up', ...eventLog]);
+          setEventLog(['Some trash from the ground is picked up', ...eventLogToKeep]);
           break;
         case 'buildRecycler':
-          setEventLog(['The recycler is now operational', ...eventLog]);
+          setEventLog(['The recycler is now operational', ...eventLogToKeep]);
           break;
         case 'useRecycler':
           setEventLog([
             'Some trash is recycled into usable items',
-            ...eventLog,
+            ...eventLogToKeep,
           ]);
           break;
         case 'buildAirFilterv':
-          setEventLog(['An air filter has been constructed', ...eventLog]);
+          setEventLog(['An air filter has been constructed', ...eventLogToKeep]);
           break;
         case 'buildNet':
-          setEventLog(['A net has been built', ...eventLog]);
+          setEventLog(['A net has been built', ...eventLogToKeep]);
           break;
         case 'useNet':
-          setEventLog(['Some litter is filtered from the river', ...eventLog]);
+          setEventLog(['Some litter is filtered from the river', ...eventLogToKeep]);
           break;
         case 'buildBridge':
-          setEventLog(['The river can now be crossed', ...eventLog]);
+          setEventLog(['The river can now be crossed', ...eventLogToKeep]);
           break;
         default:
           throw Error(`Undeveloped action: ${currentAction}`);
