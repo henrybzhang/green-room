@@ -9,7 +9,7 @@ const initialLog = [
 ];
 
 function EventLog() {
-  const { currentAction } = useContext(ActionContext);
+  const { currentAction, environmentLevel } = useContext(ActionContext);
   const [eventLog, setEventLog] = useState(initialLog);
 
   useEffect(() => {
@@ -26,10 +26,11 @@ function EventLog() {
 
       switch (currentAction) {
         case 'pickUpTrash':
-          setEventLog([
-            'The surrounding area has been slightly cleared of trash',
-            ...eventLogToKeep,
-          ]);
+          {
+            const eventText = 'The surrounding area has been slightly cleared of trash';
+
+            setEventLog([eventText, ...eventLogToKeep]);
+          }
           break;
         case 'buildRecycler':
           setEventLog(['The recycler is now operational', ...eventLogToKeep]);
@@ -43,6 +44,12 @@ function EventLog() {
         case 'buildAirFilter':
           setEventLog([
             'An air filter has been constructed',
+            ...eventLogToKeep,
+          ]);
+          break;
+        case 'plantSeeds':
+          setEventLog([
+            'The beginnings of new life have been planted',
             ...eventLogToKeep,
           ]);
           break;
@@ -65,7 +72,19 @@ function EventLog() {
       // eslint-disable-next-line no-console
       console.log(e);
     }
-  }, [currentAction]);
+  }, [currentAction, environmentLevel]);
+
+  useEffect(() => {
+    let eventLogToKeep = eventLog.slice(0, MAX_EVENTS);
+    let eventText = null;
+    if (environmentLevel === 7) {
+      eventText = 'The area has been completely cleared of trash and pollution. Nature is finally beginning to recover.';
+      eventLogToKeep = [];
+    }
+    if (eventText) {
+      setEventLog([eventText, ...eventLogToKeep]);
+    }
+  }, [environmentLevel]);
 
   return (
     <div className="log">

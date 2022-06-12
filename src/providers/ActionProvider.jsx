@@ -53,6 +53,7 @@ const actionKeySet = new Set([
   'buildRecycler',
   'useRecycler',
   'buildAirFilter',
+  'plantSeeds',
   'buildNet',
   'useNet',
   'buildBridge',
@@ -133,6 +134,8 @@ function ActionProvider({ children }) {
           });
           updateItems(buildingRequirements.airFilter);
           break;
+        case 'plantSeeds':
+          break;
         case 'buildNet':
           setPlayerStructures({
             ...playerStructures,
@@ -167,6 +170,11 @@ function ActionProvider({ children }) {
   }, [currentAction]);
 
   useEffect(() => {
+    if (environmentLevel === 7) {
+      setAvailableActions({});
+      return;
+    }
+
     setAvailableActions({
       pickUpTrash: 'Pick up trash',
       ...(checkBuildingRequirements('recycler')
@@ -178,11 +186,15 @@ function ActionProvider({ children }) {
         && playerStructures.recycler && {
         buildAirFilter: 'Construct air filter',
       }),
+      ...(environmentLevel === 3 && {
+        plantSeeds: 'Plant seeds',
+      }),
       ...(checkBuildingRequirements('net')
-        && environmentLevel === 3 && { buildNet: 'Construct river net' }),
+        && !playerStructures.net
+        && environmentLevel === 4 && { buildNet: 'Construct river net' }),
       ...(playerStructures.net && { useNet: 'Filter river trash' }),
       ...(checkBuildingRequirements('bridge')
-        && environmentLevel === 4 && { buildBridge: 'Construct a bridge' }),
+        && environmentLevel === 5 && { buildBridge: 'Construct a bridge' }),
     });
   }, [playerItems, environmentLevel, playerStructures]);
 
@@ -196,12 +208,14 @@ function ActionProvider({ children }) {
       && playerStructures.airFilter
     ) {
       newEnvironmentLevel = 3;
-    } else if (environmentLevel === 3 && playerActionCount.useNet >= 5) {
+    } else if (environmentLevel === 3 && playerActionCount.plantSeeds) {
       newEnvironmentLevel = 4;
-    } else if (environmentLevel === 4 && playerStructures.bridge) {
+    } else if (environmentLevel === 4 && playerActionCount.useNet >= 5) {
       newEnvironmentLevel = 5;
-    } else if (environmentLevel === 5 && playerActionCount.pickUpTrash >= 10) {
+    } else if (environmentLevel === 5 && playerStructures.bridge) {
       newEnvironmentLevel = 6;
+    } else if (environmentLevel === 6 && playerActionCount.pickUpTrash >= 10) {
+      newEnvironmentLevel = 7;
     } else {
       return;
     }

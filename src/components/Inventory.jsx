@@ -1,11 +1,13 @@
 import { useContext } from 'react';
 import { InventoryContext } from '../providers/InventoryProvider';
+import { ActionContext } from '../providers/ActionProvider';
 import '../styles/Inventory.css';
 
 function Inventory() {
   const { playerItems } = useContext(InventoryContext);
+  const { environmentLevel } = useContext(ActionContext);
 
-  return (
+  return environmentLevel === 7 ? null : (
     <fieldset className="inventory-container">
       <legend>Collection</legend>
       {Object.entries(playerItems).map(([itemName, amount]) => (

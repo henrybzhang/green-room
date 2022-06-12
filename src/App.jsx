@@ -11,7 +11,8 @@ function App() {
     <div
       className="app"
       style={{
-        backgroundImage: `url(${backgroundImage})`,
+        // backgroundImage: `url(${backgroundImage})`,
+        backgroundImage: `url(${process.env.PUBLIC_URL}/images/${backgroundImage})`,
       }}
     >
       <div className="content">

@@ -6,54 +6,35 @@ import React, {
   useMemo,
 } from 'react';
 import { ActionContext } from './ActionProvider';
-import background1 from '../images/1.jpeg';
-import background2 from '../images/2.jpeg';
-import background3 from '../images/3.jpeg';
-import background4 from '../images/4.jpeg';
-import background5 from '../images/5.gif';
-import background6 from '../images/6.gif';
-
-const backgrounds = [
-  background1,
-  background2,
-  background3,
-  background4,
-  background5,
-  background6,
-];
 
 const BackgroundContext = createContext();
 
 function BackgroundProvider({ children }) {
   const { environmentLevel } = useContext(ActionContext);
-  const [backgroundImage, setBackgroundImage] = useState(background1);
-
-  useEffect(() => {
-    backgrounds.forEach((picture) => {
-      const img = new Image();
-      img.src = picture;
-    });
-  }, []);
+  const [backgroundImage, setBackgroundImage] = useState('1.jpeg');
 
   useEffect(() => {
     switch (environmentLevel) {
       case 1:
-        setBackgroundImage(background1);
+        setBackgroundImage('start.jpeg');
         break;
       case 2:
-        setBackgroundImage(background2);
+        setBackgroundImage('initialClear.jpeg');
         break;
       case 3:
-        setBackgroundImage(background3);
+        setBackgroundImage('builtAirFilter.jpeg');
         break;
       case 4:
-        setBackgroundImage(background4);
+        setBackgroundImage('plantSeeds.jpeg');
         break;
       case 5:
-        setBackgroundImage(background5);
+        setBackgroundImage('cleanRiver.jpeg');
         break;
       case 6:
-        setBackgroundImage(background6);
+        setBackgroundImage('builtBridge.gif');
+        break;
+      case 7:
+        setBackgroundImage('final.gif');
         break;
       default:
         break;

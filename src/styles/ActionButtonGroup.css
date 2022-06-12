@@ -3,4 +3,5 @@
   flex-direction: column;
   margin: 3% auto;
   flex-basis: 20%;
+  transition: visibility 2s ease-in-out 0.5s;
 }
