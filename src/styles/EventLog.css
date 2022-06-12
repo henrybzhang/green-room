@@ -1,11 +1,12 @@
 .log {
   color: white;
   text-align: left;
-  margin-right: 15px;
+  margin-right: 20px;
   margin: 3%;
   -webkit-text-stroke-width: 0.3px;
   -webkit-text-stroke-color: white;
   text-shadow: 4px 4px 0px #000000, 1px 1px 5px #000000, 1px 1px 5px #000000, 1px 1px 5px #000000;
   /* text-shadow: 2px 2px 30px #000000; */
   margin-left: 14%;
+  
 }
