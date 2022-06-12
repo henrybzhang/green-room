@@ -176,14 +176,17 @@ function ActionProvider({ children }) {
     }
 
     setAvailableActions({
-      pickUpTrash: 'Pick up trash',
+      ...((environmentLevel <= 2 || environmentLevel === 6) && {
+        pickUpTrash: 'Pick up trash',
+      }),
       ...(checkBuildingRequirements('recycler')
         && !playerStructures.recycler && { buildRecycler: 'Fix recycler' }),
       ...(playerItems.trash
         && playerStructures.recycler && { useRecycler: 'Recycle trash' }),
       ...(checkBuildingRequirements('airFilter')
         && !playerStructures.airFilter
-        && playerStructures.recycler && {
+        && playerStructures.recycler
+        && environmentLevel === 2 && {
         buildAirFilter: 'Construct air filter',
       }),
       ...(environmentLevel === 3 && {
@@ -192,7 +195,8 @@ function ActionProvider({ children }) {
       ...(checkBuildingRequirements('net')
         && !playerStructures.net
         && environmentLevel === 4 && { buildNet: 'Construct river net' }),
-      ...(playerStructures.net && { useNet: 'Filter river trash' }),
+      ...(playerStructures.net
+        && environmentLevel === 4 && { useNet: 'Filter river trash' }),
       ...(checkBuildingRequirements('bridge')
         && environmentLevel === 5 && { buildBridge: 'Construct a bridge' }),
     });

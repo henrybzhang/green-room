@@ -28,7 +28,6 @@ function EventLog() {
         case 'pickUpTrash':
           {
             const eventText = 'The surrounding area has been slightly cleared of trash';
-
             setEventLog([eventText, ...eventLogToKeep]);
           }
           break;
