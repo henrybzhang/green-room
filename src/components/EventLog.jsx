@@ -10,7 +10,7 @@ const initialLog = [
 ];
 
 function EventLog() {
-  const { nextText, setNextText } = useContext(ActionContext);
+  const { nextText, setNextText, environmentLevel } = useContext(ActionContext);
   const [eventLog, setEventLog] = useState(initialLog);
 
   useEffect(() => {
@@ -18,7 +18,12 @@ function EventLog() {
       return;
     }
 
-    setEventLog([nextText, ...eventLog.slice(0, MAX_EVENTS)]);
+    let eventLogToKeep = eventLog.slice(0, MAX_EVENTS);
+    if (environmentLevel === 7) {
+      eventLogToKeep = [];
+    }
+
+    setEventLog([nextText, ...eventLogToKeep]);
     setNextText(null);
   }, [nextText]);
 
