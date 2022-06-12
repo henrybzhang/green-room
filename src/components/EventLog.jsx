@@ -22,7 +22,10 @@ function EventLog() {
 
       switch (currentAction) {
         case 'pickUpTrash':
-          setEventLog(['Some trash from the ground is picked up', ...eventLogToKeep]);
+          setEventLog([
+            'Some trash from the ground is picked up',
+            ...eventLogToKeep,
+          ]);
           break;
         case 'buildRecycler':
           setEventLog(['The recycler is now operational', ...eventLogToKeep]);
@@ -34,13 +37,19 @@ function EventLog() {
           ]);
           break;
         case 'buildAirFilterv':
-          setEventLog(['An air filter has been constructed', ...eventLogToKeep]);
+          setEventLog([
+            'An air filter has been constructed',
+            ...eventLogToKeep,
+          ]);
           break;
         case 'buildNet':
           setEventLog(['A net has been built', ...eventLogToKeep]);
           break;
         case 'useNet':
-          setEventLog(['Some litter is filtered from the river', ...eventLogToKeep]);
+          setEventLog([
+            'Some litter is filtered from the river',
+            ...eventLogToKeep,
+          ]);
           break;
         case 'buildBridge':
           setEventLog(['The river can now be crossed', ...eventLogToKeep]);
