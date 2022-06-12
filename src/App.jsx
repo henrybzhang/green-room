@@ -14,11 +14,14 @@ function App() {
         backgroundImage: `url(${backgroundImage})`,
       }}
     >
-      <div className="content">
-        <EventLog />
-        <ActionButtonGroup />
-        <Inventory />
-      </div>
+      <div>
+        <h1 className='title'>Help us clean this area!</h1>
+        <div className="content">
+          <EventLog />
+          <ActionButtonGroup />
+          <Inventory />
+        </div>
+      </div>  
     </div>
   );
 }
