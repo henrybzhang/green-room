@@ -13,11 +13,27 @@ import background4 from '../images/4.jpeg';
 import background5 from '../images/5.gif';
 import background6 from '../images/6.gif';
 
+const backgrounds = [
+  background1,
+  background2,
+  background3,
+  background4,
+  background5,
+  background6,
+];
+
 const BackgroundContext = createContext();
 
 function BackgroundProvider({ children }) {
   const { environmentLevel } = useContext(ActionContext);
   const [backgroundImage, setBackgroundImage] = useState(background1);
+
+  useEffect(() => {
+    backgrounds.forEach((picture) => {
+      const img = new Image();
+      img.src = picture;
+    });
+  }, []);
 
   useEffect(() => {
     switch (environmentLevel) {

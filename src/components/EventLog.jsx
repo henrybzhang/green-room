@@ -4,9 +4,13 @@ import { ActionContext, actionKeySet } from '../providers/ActionProvider';
 
 const MAX_EVENTS = 20;
 
+const initialLog = [
+  'The surrounding area is piled high with trash and is extremely polluted. Smog covers the land, making the visibility almost nil.',
+];
+
 function EventLog() {
   const { currentAction } = useContext(ActionContext);
-  const [eventLog, setEventLog] = useState([]);
+  const [eventLog, setEventLog] = useState(initialLog);
 
   useEffect(() => {
     if (!currentAction) {
@@ -23,7 +27,7 @@ function EventLog() {
       switch (currentAction) {
         case 'pickUpTrash':
           setEventLog([
-            'Some trash from the ground is picked up',
+            'The surrounding area has been slightly cleared of trash',
             ...eventLogToKeep,
           ]);
           break;
@@ -32,11 +36,11 @@ function EventLog() {
           break;
         case 'useRecycler':
           setEventLog([
-            'Some trash is recycled into usable items',
+            'Some usable items have been recycled from trash',
             ...eventLogToKeep,
           ]);
           break;
-        case 'buildAirFilterv':
+        case 'buildAirFilter':
           setEventLog([
             'An air filter has been constructed',
             ...eventLogToKeep,
@@ -47,7 +51,7 @@ function EventLog() {
           break;
         case 'useNet':
           setEventLog([
-            'Some litter is filtered from the river',
+            'Some litter has been filtered from the river',
             ...eventLogToKeep,
           ]);
           break;
