@@ -164,7 +164,7 @@ function ActionProvider({ children }) {
               Math.floor(Math.random() * riverTrashItems.length)
             ];
             updateItems({ [itemName]: 1 });
-            setNextText('Some trash has been removed from the river');
+            setNextText(`Some ${itemName} has been removed from the river`);
           }
           break;
         case 'buildBridge':
