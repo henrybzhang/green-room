@@ -9,15 +9,13 @@ const initialLog = [
 ];
 
 function EventLog() {
-  const { currentAction, nextText, setNextText } = useContext(ActionContext);
+  const { nextText, setNextText } = useContext(ActionContext);
   const [eventLog, setEventLog] = useState(initialLog);
 
   useEffect(() => {
     if (!nextText) {
       return;
     }
-
-    console.log(nextText);
 
     setEventLog([nextText, ...eventLog.slice(0, MAX_EVENTS)]);
     setNextText(null);

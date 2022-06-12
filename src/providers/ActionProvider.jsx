@@ -140,7 +140,9 @@ function ActionProvider({ children }) {
             ...playerStructures,
             airFilter: true,
           });
-          setNextText('An air filter has begun to reduce the amount of smog in the air');
+          setNextText(
+            'An air filter has begun to reduce the amount of smog in the air',
+          );
           updateItems(buildingRequirements.airFilter);
           break;
         case 'plantSeeds':
@@ -152,7 +154,7 @@ function ActionProvider({ children }) {
             net: true,
           });
           setNextText(
-            'Removing trash in the flowing river is now a possibility',
+            'Removing trash in the disgusting river is now a possibility',
           );
           updateItems(buildingRequirements.net);
           break;
@@ -162,7 +164,7 @@ function ActionProvider({ children }) {
               Math.floor(Math.random() * riverTrashItems.length)
             ];
             updateItems({ [itemName]: 1 });
-            setNextText('Some trash has been taken from the river');
+            setNextText('Some trash has been removed from the river');
           }
           break;
         case 'buildBridge':
