@@ -15,7 +15,7 @@ function App() {
         backgroundImage: `url(${backgroundImage})`,
       }}
     >
-      <div className="items">
+      <div className="content">
         <EventLog />
         <ActionButtonGroup actionMap={availableActions} />
         <Inventory />

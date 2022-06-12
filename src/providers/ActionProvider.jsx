@@ -91,7 +91,7 @@ function ActionProvider({ children }) {
       ...(playerActionCount.pickUpTrash >= 10
         && !playerStructures.recycler && { fixRecycler: 'Fix recycler' }),
       ...(playerItems.trash
-        && !playerStructures.recycler && { useRecycler: 'Recycle trash' }),
+        && playerStructures.recycler && { useRecycler: 'Recycle trash' }),
     });
   }, [playerItems, playerActionCount, playerStructures]);
 
