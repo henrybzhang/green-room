@@ -5,6 +5,7 @@ import { ActionContext } from '../providers/ActionProvider';
 const MAX_EVENTS = 20;
 
 const initialLog = [
+  'Welcome to a recovering world',
   'The surrounding area is piled high with trash and is extremely polluted. Smog covers the land, making the visibility almost nil.',
 ];
 
