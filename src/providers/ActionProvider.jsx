@@ -16,17 +16,18 @@ const initialActions = {
 
 const prodbuildingRequirements = {
   recycler: {
-    metal: -5,
+    metal: -2,
   },
   airFilter: {
-    wood: -5,
+    wood: -2,
+    plastic: -2,
   },
   net: {
-    plastic: -5,
+    plastic: -2,
   },
   bridge: {
-    wood: -10,
-    metal: -10,
+    wood: -5,
+    metal: -5,
   },
 };
 const debugbuildingRequirements = {
@@ -35,6 +36,7 @@ const debugbuildingRequirements = {
   },
   airFilter: {
     wood: -1,
+    plastic: -1,
   },
   net: {
     plastic: -1,
@@ -89,17 +91,17 @@ function ActionProvider({ children }) {
     }
   };
 
-  const checkBuildingRequirements = (buildingName) => {
-    let missingRequirements = false;
+  const hasBuildingRequirements = (buildingName) => {
+    let hasRequirements = true;
     Object.entries(buildingRequirements[buildingName]).forEach(
       ([itemName, amount]) => {
-        if (playerItems[itemName] + amount >= 0) {
-          missingRequirements = true;
+        if (!playerItems[itemName] || playerItems[itemName] + amount < 0) {
+          hasRequirements = false;
         }
       },
     );
 
-    return missingRequirements;
+    return hasRequirements;
   };
 
   useEffect(() => {
@@ -160,7 +162,7 @@ function ActionProvider({ children }) {
             net: true,
           });
           setNextText(
-            'Removing trash in the disgusting river is now a possibility',
+            'Removing trash from the disgusting river is now a possibility',
           );
           updateItems(buildingRequirements.net);
           break;
@@ -202,11 +204,11 @@ function ActionProvider({ children }) {
       ...((environmentLevel <= 2 || environmentLevel === 6) && {
         pickUpTrash: 'Pick up trash',
       }),
-      ...(checkBuildingRequirements('recycler')
+      ...(hasBuildingRequirements('recycler')
         && !playerStructures.recycler && { buildRecycler: 'Fix recycler' }),
       ...(playerItems.trash
         && playerStructures.recycler && { useRecycler: 'Recycle trash' }),
-      ...(checkBuildingRequirements('airFilter')
+      ...(hasBuildingRequirements('airFilter')
         && !playerStructures.airFilter
         && playerStructures.recycler
         && environmentLevel === 2 && {
@@ -215,33 +217,36 @@ function ActionProvider({ children }) {
       ...(environmentLevel === 3 && {
         plantSeeds: 'Plant seeds',
       }),
-      ...(checkBuildingRequirements('net')
+      ...(hasBuildingRequirements('net')
         && !playerStructures.net
         && environmentLevel === 4 && { buildNet: 'Construct river net' }),
       ...(playerStructures.net
         && environmentLevel === 4 && { useNet: 'Filter river trash' }),
-      ...(checkBuildingRequirements('bridge')
+      ...(hasBuildingRequirements('bridge')
         && environmentLevel === 5 && { buildBridge: 'Construct a bridge' }),
     });
   }, [playerItems, environmentLevel, playerStructures]);
 
   useEffect(() => {
     let newEnvironmentLevel = environmentLevel;
-    if (environmentLevel === 1 && playerActionCount.pickUpTrash >= 10) {
+    if (environmentLevel === 1 && playerActionCount.pickUpTrash >= 3) {
       newEnvironmentLevel = 2;
+      setNextText('Clearing trash has provided some breathing room');
     } else if (
       environmentLevel === 2
-      && playerActionCount.pickUpTrash >= 10
+      && playerActionCount.pickUpTrash >= 3
       && playerStructures.airFilter
     ) {
       newEnvironmentLevel = 3;
+      setNextText('This side of the river has been cleared of trash');
     } else if (environmentLevel === 3 && playerActionCount.plantSeeds) {
       newEnvironmentLevel = 4;
-    } else if (environmentLevel === 4 && playerActionCount.useNet >= 5) {
+    } else if (environmentLevel === 4 && playerActionCount.useNet >= 3) {
+      setNextText('The river now looks like a river again');
       newEnvironmentLevel = 5;
     } else if (environmentLevel === 5 && playerStructures.bridge) {
       newEnvironmentLevel = 6;
-    } else if (environmentLevel === 6 && playerActionCount.pickUpTrash >= 10) {
+    } else if (environmentLevel === 6 && playerActionCount.pickUpTrash >= 3) {
       newEnvironmentLevel = 7;
       setNextText(
         'The area has been completely cleared of trash and pollution. Nature is finally beginning to recover.',
