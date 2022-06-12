@@ -67,6 +67,7 @@ function ActionProvider({ children }) {
   const [availableActions, setAvailableActions] = useState(initialActions);
   const [playerActionCount, setPlayerActionCount] = useState({});
   const [environmentLevel, setEnvironmentLevel] = useState(1);
+  const [nextText, setNextText] = useState(null);
 
   const addPlayerActionCount = (playerAction) => {
     if (playerAction in playerActionCount) {
@@ -109,6 +110,11 @@ function ActionProvider({ children }) {
         case 'pickUpTrash':
           {
             const itemName = landTrashItems[Math.floor(Math.random() * landTrashItems.length)];
+            let newText = 'The surrounding area has been slightly cleared of trash';
+            if (itemName !== 'trash') {
+              newText = `Clearing some trash has provided some useful ${itemName}`;
+            }
+            setNextText(newText);
             updateItems({ [itemName]: 1 });
           }
           break;
@@ -117,6 +123,7 @@ function ActionProvider({ children }) {
             ...playerStructures,
             recycler: true,
           });
+          setNextText('The recycler is now operational');
           updateItems(buildingRequirements.recycler);
           break;
         case 'useRecycler':
@@ -124,6 +131,7 @@ function ActionProvider({ children }) {
             const itemName = trashRefinedItems[
               Math.floor(Math.random() * trashRefinedItems.length)
             ];
+            setNextText(`Some ${itemName} has been recycled from trash`);
             updateItems({ [itemName]: 1, trash: -1 });
           }
           break;
@@ -132,15 +140,20 @@ function ActionProvider({ children }) {
             ...playerStructures,
             airFilter: true,
           });
+          setNextText('An air filter has begun to reduce the amount of smog in the air');
           updateItems(buildingRequirements.airFilter);
           break;
         case 'plantSeeds':
+          setNextText('The beginnings of new life have been planted');
           break;
         case 'buildNet':
           setPlayerStructures({
             ...playerStructures,
             net: true,
           });
+          setNextText(
+            'Removing trash in the flowing river is now a possibility',
+          );
           updateItems(buildingRequirements.net);
           break;
         case 'useNet':
@@ -149,6 +162,7 @@ function ActionProvider({ children }) {
               Math.floor(Math.random() * riverTrashItems.length)
             ];
             updateItems({ [itemName]: 1 });
+            setNextText('Some trash has been taken from the river');
           }
           break;
         case 'buildBridge':
@@ -157,6 +171,7 @@ function ActionProvider({ children }) {
             bridge: true,
           });
           updateItems(buildingRequirements.bridge);
+          setNextText('The river can now be crossed');
           break;
         default:
           throw Error(`Undeveloped action: ${currentAction}`);
@@ -167,7 +182,7 @@ function ActionProvider({ children }) {
       console.log(e);
     }
     setCurrentAction(null);
-  }, [currentAction]);
+  }, [currentAction, environmentLevel]);
 
   useEffect(() => {
     if (environmentLevel === 7) {
@@ -220,6 +235,9 @@ function ActionProvider({ children }) {
       newEnvironmentLevel = 6;
     } else if (environmentLevel === 6 && playerActionCount.pickUpTrash >= 10) {
       newEnvironmentLevel = 7;
+      setNextText(
+        'The area has been completely cleared of trash and pollution. Nature is finally beginning to recover.',
+      );
     } else {
       return;
     }
@@ -232,9 +250,11 @@ function ActionProvider({ children }) {
       currentAction,
       environmentLevel,
       availableActions,
+      nextText,
+      setNextText,
       setCurrentAction,
     }),
-    [currentAction, environmentLevel, availableActions],
+    [currentAction, environmentLevel, availableActions, nextText],
   );
 
   return (

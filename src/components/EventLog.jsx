@@ -1,6 +1,6 @@
 import { useContext, useState, useEffect } from 'react';
 import '../styles/EventLog.css';
-import { ActionContext, actionKeySet } from '../providers/ActionProvider';
+import { ActionContext } from '../providers/ActionProvider';
 
 const MAX_EVENTS = 20;
 
@@ -9,81 +9,19 @@ const initialLog = [
 ];
 
 function EventLog() {
-  const { currentAction, environmentLevel } = useContext(ActionContext);
+  const { currentAction, nextText, setNextText } = useContext(ActionContext);
   const [eventLog, setEventLog] = useState(initialLog);
 
   useEffect(() => {
-    if (!currentAction) {
+    if (!nextText) {
       return;
     }
 
-    try {
-      if (!actionKeySet.has(currentAction)) {
-        throw Error(`Unknown action: ${currentAction}`);
-      }
+    console.log(nextText);
 
-      const eventLogToKeep = eventLog.slice(0, MAX_EVENTS);
-
-      switch (currentAction) {
-        case 'pickUpTrash':
-          {
-            const eventText = 'The surrounding area has been slightly cleared of trash';
-            setEventLog([eventText, ...eventLogToKeep]);
-          }
-          break;
-        case 'buildRecycler':
-          setEventLog(['The recycler is now operational', ...eventLogToKeep]);
-          break;
-        case 'useRecycler':
-          setEventLog([
-            'Some usable items have been recycled from trash',
-            ...eventLogToKeep,
-          ]);
-          break;
-        case 'buildAirFilter':
-          setEventLog([
-            'An air filter has been constructed',
-            ...eventLogToKeep,
-          ]);
-          break;
-        case 'plantSeeds':
-          setEventLog([
-            'The beginnings of new life have been planted',
-            ...eventLogToKeep,
-          ]);
-          break;
-        case 'buildNet':
-          setEventLog(['A net has been built', ...eventLogToKeep]);
-          break;
-        case 'useNet':
-          setEventLog([
-            'Some litter has been filtered from the river',
-            ...eventLogToKeep,
-          ]);
-          break;
-        case 'buildBridge':
-          setEventLog(['The river can now be crossed', ...eventLogToKeep]);
-          break;
-        default:
-          throw Error(`Undeveloped action: ${currentAction}`);
-      }
-    } catch (e) {
-      // eslint-disable-next-line no-console
-      console.log(e);
-    }
-  }, [currentAction, environmentLevel]);
-
-  useEffect(() => {
-    let eventLogToKeep = eventLog.slice(0, MAX_EVENTS);
-    let eventText = null;
-    if (environmentLevel === 7) {
-      eventText = 'The area has been completely cleared of trash and pollution. Nature is finally beginning to recover.';
-      eventLogToKeep = [];
-    }
-    if (eventText) {
-      setEventLog([eventText, ...eventLogToKeep]);
-    }
-  }, [environmentLevel]);
+    setEventLog([nextText, ...eventLog.slice(0, MAX_EVENTS)]);
+    setNextText(null);
+  }, [nextText]);
 
   return (
     <div className="log">
