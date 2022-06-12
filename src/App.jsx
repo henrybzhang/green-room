@@ -2,12 +2,11 @@ import { useContext } from 'react';
 import Inventory from './components/Inventory';
 import ActionButtonGroup from './components/ActionButtonGroup';
 import EventLog from './components/EventLog';
-import { ActionContext } from './providers/ActionProvider';
+import { BackgroundContext } from './providers/BackgroundProvider';
 import './styles/App.css';
 
 function App() {
-  const { availableActions, backgroundImage } = useContext(ActionContext);
-  console.log('availableActions', availableActions);
+  const { backgroundImage } = useContext(BackgroundContext);
   return (
     <div
       className="app"
@@ -17,7 +16,7 @@ function App() {
     >
       <div className="content">
         <EventLog />
-        <ActionButtonGroup actionMap={availableActions} />
+        <ActionButtonGroup />
         <Inventory />
       </div>
     </div>

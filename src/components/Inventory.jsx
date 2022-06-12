@@ -9,14 +9,12 @@ function Inventory() {
     <fieldset className="invent">
       <legend>Collection</legend>
       {Object.entries(playerItems).map(([itemName, amount]) => (
-        <div className='invent-items'>
+        <div className="invent-items">
           <div>
             {itemName}
             :&nbsp;
           </div>
-          <div className='invent-item-two'>
-            {amount}
-          </div> 
+          <div className="invent-item-two">{amount}</div>
         </div>
       ))}
     </fieldset>
