@@ -6,15 +6,15 @@ function Inventory() {
   const { playerItems } = useContext(InventoryContext);
 
   return (
-    <fieldset className="invent">
+    <fieldset className="inventory-container">
       <legend>Collection</legend>
       {Object.entries(playerItems).map(([itemName, amount]) => (
-        <div className="invent-items">
+        <div className="inventory-item" key={itemName}>
           <div>
             {itemName}
             :&nbsp;
           </div>
-          <div className="invent-item-two">{amount}</div>
+          <div className="item-count">{amount}</div>
         </div>
       ))}
     </fieldset>

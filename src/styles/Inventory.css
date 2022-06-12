@@ -1,4 +1,4 @@
-.invent {
+.inventory-container {
   color: white;
   text-align: left;
   border: 1.7px dashed white;
@@ -14,12 +14,12 @@
   flex-basis: 10%;
 }
 
-.invent-items {
+.inventory-item {
   display: flex;
   flex-direction: row;
 }
 
-.invent-item-two {
+.item-count {
   margin-right: 3%;
   margin-left: auto;
 }

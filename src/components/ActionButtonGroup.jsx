@@ -9,7 +9,11 @@ function ActionButtonGroup() {
   return (
     <div className="buttons-group">
       {Object.entries(availableActions).map(([actionName, actionText]) => (
-        <ActionButton actionName={actionName} actionText={actionText} />
+        <ActionButton
+          actionName={actionName}
+          actionText={actionText}
+          key={actionName}
+        />
       ))}
     </div>
   );

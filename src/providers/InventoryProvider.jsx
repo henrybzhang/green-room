@@ -1,35 +1,35 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useMemo } from 'react';
 
 const InventoryContext = createContext();
 
 function InventoryProvider({ children }) {
   const [playerItems, setPlayerItems] = useState({});
-
   const [playerStructures, setPlayerStructures] = useState({});
 
-  const addItem = (itemName, amount) => {
-    if (itemName in playerItems) {
-      setPlayerItems({
-        ...playerItems,
-        [itemName]: playerItems[itemName] + amount,
-      });
-    } else {
-      setPlayerItems({
-        ...playerItems,
-        [itemName]: amount,
-      });
-    }
+  const updateItems = (itemChanges) => {
+    const updatedPlayerItems = { ...playerItems };
+    Object.entries(itemChanges).forEach(([itemName, amount]) => {
+      if (itemName in updatedPlayerItems) {
+        updatedPlayerItems[itemName] += amount;
+      } else {
+        updatedPlayerItems[itemName] = amount;
+      }
+    });
+    setPlayerItems(updatedPlayerItems);
   };
 
+  const value = useMemo(
+    () => ({
+      playerItems,
+      playerStructures,
+      setPlayerStructures,
+      updateItems,
+    }),
+    [playerItems, playerStructures],
+  );
+
   return (
-    <InventoryContext.Provider
-      value={{
-        playerItems,
-        playerStructures,
-        setPlayerStructures,
-        addItem,
-      }}
-    >
+    <InventoryContext.Provider value={value}>
       {children}
     </InventoryContext.Provider>
   );

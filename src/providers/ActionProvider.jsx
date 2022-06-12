@@ -1,5 +1,9 @@
 import React, {
-  createContext, useState, useEffect, useContext,
+  createContext,
+  useState,
+  useEffect,
+  useContext,
+  useMemo,
 } from 'react';
 import { InventoryContext } from './InventoryProvider';
 
@@ -9,23 +13,40 @@ const initialActions = {
   pickUpTrash: 'Pick up trash',
 };
 
+// const buildingRequirements = {
+//   recycler: {
+//     metal: -5,
+//   },
+//   airFilter: {
+//     wood: -5,
+//   },
+//   net: {
+//     plastic: -5,
+//   },
+//   bridge: {
+//     wood: -10,
+//     metal: -10,
+//   },
+// };
+const buildingRequirements = {
+  recycler: {
+    metal: -1,
+  },
+  airFilter: {
+    wood: -1,
+  },
+  net: {
+    plastic: -1,
+  },
+  bridge: {
+    wood: -1,
+    metal: -1,
+  },
+};
+
 const landTrashItems = ['trash', 'wood', 'metal', 'plastic'];
 const riverTrashItems = ['trash', 'plastic'];
-
-const buildActions = {
-  recycler: 'Fix recycler',
-  net: 'build net',
-  waterFilter: 'build waterFilter',
-  airFilter: 'build airFilter',
-  // 'workshop': 'build workshop',
-  // 'solarPanel': 'build solar panels',
-  // 'windmill': 'build windmill',
-  // 'automaticTrashPicker': 'build automatic trash picker',
-  // 'automaticTrashFilter': 'build automatic trash filter',
-  // 'automaticWaterFilter': 'build automatic water filter',
-  // 'automaticAirFilter': 'build automatic air filter',
-  bridge: 'build bridge',
-};
+const trashRefinedItems = ['wood', 'metal', 'plastic'];
 
 const actionKeySet = new Set([
   'pickUpTrash',
@@ -39,7 +60,7 @@ const actionKeySet = new Set([
 
 function ActionProvider({ children }) {
   const {
-    addItem, playerItems, playerStructures, setPlayerStructures,
+    playerItems, updateItems, playerStructures, setPlayerStructures,
   } = useContext(InventoryContext);
   const [currentAction, setCurrentAction] = useState(null);
   const [availableActions, setAvailableActions] = useState(initialActions);
@@ -60,6 +81,19 @@ function ActionProvider({ children }) {
     }
   };
 
+  const checkBuildingRequirements = (buildingName) => {
+    let missingRequirements = false;
+    Object.entries(buildingRequirements[buildingName]).forEach(
+      ([itemName, amount]) => {
+        if (playerItems[itemName] + amount >= 0) {
+          missingRequirements = true;
+        }
+      },
+    );
+
+    return missingRequirements;
+  };
+
   useEffect(() => {
     if (!currentAction) {
       return;
@@ -74,7 +108,7 @@ function ActionProvider({ children }) {
         case 'pickUpTrash':
           {
             const itemName = landTrashItems[Math.floor(Math.random() * landTrashItems.length)];
-            addItem(itemName, 1);
+            updateItems({ [itemName]: 1 });
           }
           break;
         case 'buildRecycler':
@@ -82,27 +116,36 @@ function ActionProvider({ children }) {
             ...playerStructures,
             recycler: true,
           });
+          updateItems(buildingRequirements.recycler);
           break;
         case 'useRecycler':
+          {
+            const itemName = trashRefinedItems[
+              Math.floor(Math.random() * trashRefinedItems.length)
+            ];
+            updateItems({ [itemName]: 1, trash: -1 });
+          }
           break;
         case 'buildAirFilter':
           setPlayerStructures({
             ...playerStructures,
             airFilter: true,
           });
+          updateItems(buildingRequirements.airFilter);
           break;
         case 'buildNet':
           setPlayerStructures({
             ...playerStructures,
             net: true,
           });
+          updateItems(buildingRequirements.net);
           break;
         case 'useNet':
           {
             const itemName = riverTrashItems[
               Math.floor(Math.random() * riverTrashItems.length)
             ];
-            addItem(itemName, 1);
+            updateItems({ [itemName]: 1 });
           }
           break;
         case 'buildBridge':
@@ -110,12 +153,14 @@ function ActionProvider({ children }) {
             ...playerStructures,
             bridge: true,
           });
+          updateItems(buildingRequirements.bridge);
           break;
         default:
           throw Error(`Undeveloped action: ${currentAction}`);
       }
       addPlayerActionCount(currentAction);
     } catch (e) {
+      // eslint-disable-next-line no-console
       console.log(e);
     }
     setCurrentAction(null);
@@ -124,22 +169,19 @@ function ActionProvider({ children }) {
   useEffect(() => {
     setAvailableActions({
       pickUpTrash: 'Pick up trash',
-      ...(playerItems.metal > 5
+      ...(checkBuildingRequirements('recycler')
         && !playerStructures.recycler && { buildRecycler: 'Fix recycler' }),
       ...(playerItems.trash
         && playerStructures.recycler && { useRecycler: 'Recycle trash' }),
-      ...(playerItems.plastic > 5
-        && playerItems.wood > 5
+      ...(checkBuildingRequirements('airFilter')
         && !playerStructures.airFilter
         && playerStructures.recycler && {
         buildAirFilter: 'Construct air filter',
       }),
-      ...(playerItems.plastic > 5
-        && !playerStructures.net
-        && playerStructures.airFilter && { buildNet: 'Construct river net' }),
+      ...(checkBuildingRequirements('net')
+        && environmentLevel === 3 && { buildNet: 'Construct river net' }),
       ...(playerStructures.net && { useNet: 'Filter river trash' }),
-      ...(playerItems.wood > 10
-        && playerItems.metal > 10
+      ...(checkBuildingRequirements('bridge')
         && environmentLevel === 4 && { buildBridge: 'Construct a bridge' }),
     });
   }, [playerItems, environmentLevel, playerStructures]);
@@ -167,17 +209,18 @@ function ActionProvider({ children }) {
     setEnvironmentLevel(newEnvironmentLevel);
   }, [playerStructures, environmentLevel, playerActionCount]);
 
+  const value = useMemo(
+    () => ({
+      currentAction,
+      environmentLevel,
+      availableActions,
+      setCurrentAction,
+    }),
+    [currentAction, environmentLevel, availableActions],
+  );
+
   return (
-    <ActionContext.Provider
-      value={{
-        currentAction,
-        setCurrentAction,
-        availableActions,
-        environmentLevel,
-      }}
-    >
-      {children}
-    </ActionContext.Provider>
+    <ActionContext.Provider value={value}>{children}</ActionContext.Provider>
   );
 }
 

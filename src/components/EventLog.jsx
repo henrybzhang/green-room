@@ -2,6 +2,8 @@ import { useContext, useState, useEffect } from 'react';
 import '../styles/EventLog.css';
 import { ActionContext, actionKeySet } from '../providers/ActionProvider';
 
+const MAX_EVENTS = 20;
+
 function EventLog() {
   const { currentAction } = useContext(ActionContext);
   const [eventLog, setEventLog] = useState([]);
@@ -45,14 +47,23 @@ function EventLog() {
           throw Error(`Undeveloped action: ${currentAction}`);
       }
     } catch (e) {
+      // eslint-disable-next-line no-console
       console.log(e);
     }
   }, [currentAction]);
 
   return (
     <div className="log">
-      {eventLog.map((eventText) => (
-        <div>{eventText}</div>
+      {eventLog.map((eventText, index) => (
+        <div
+          style={{
+            opacity: (MAX_EVENTS - index) / MAX_EVENTS,
+          }}
+          // eslint-disable-next-line react/no-array-index-key
+          key={index}
+        >
+          {eventText}
+        </div>
       ))}
     </div>
   );

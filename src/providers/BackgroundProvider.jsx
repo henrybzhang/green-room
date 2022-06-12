@@ -1,5 +1,9 @@
 import React, {
-  createContext, useState, useContext, useEffect,
+  createContext,
+  useState,
+  useContext,
+  useEffect,
+  useMemo,
 } from 'react';
 import { ActionContext } from './ActionProvider';
 import background1 from '../images/1.jpeg';
@@ -40,12 +44,15 @@ function BackgroundProvider({ children }) {
     }
   }, [environmentLevel]);
 
+  const value = useMemo(
+    () => ({
+      backgroundImage,
+    }),
+    [backgroundImage],
+  );
+
   return (
-    <BackgroundContext.Provider
-      value={{
-        backgroundImage,
-      }}
-    >
+    <BackgroundContext.Provider value={value}>
       {children}
     </BackgroundContext.Provider>
   );

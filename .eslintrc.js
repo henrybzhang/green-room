@@ -1,6 +1,7 @@
 module.exports = {
   env: {
     browser: true,
+    es6: true,
   },
   extends: [
     'airbnb',
@@ -25,5 +26,8 @@ module.exports = {
   },
   parserOptions: {
     ecmaVersion: 2020,
+    ecmaFeatures: {
+      jsx: true,
+    },
   },
 };
