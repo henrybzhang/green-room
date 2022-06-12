@@ -201,9 +201,7 @@ function ActionProvider({ children }) {
     }
 
     setAvailableActions({
-      ...((environmentLevel <= 2 || environmentLevel === 6) && {
-        pickUpTrash: 'Pick up trash',
-      }),
+      pickUpTrash: 'Pick up trash',
       ...(hasBuildingRequirements('recycler')
         && !playerStructures.recycler && { buildRecycler: 'Fix recycler' }),
       ...(playerItems.trash
